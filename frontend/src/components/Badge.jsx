@@ -29,6 +29,28 @@ const LABELS = {
   corrected: ['已更正', 'warn'],
   // 其他
   cross_tier: ['跨阶梯', 'warn'],
+  // ---- SLA 绩效域 ----
+  // 任务资格
+  eligible: ['合格', 'ok'],
+  excluded: ['已排除', 'bad'],
+  // 投诉
+  unverified: ['待核实', 'warn'],
+  verified: ['已核实', 'ok'],
+  dismissed: ['已驳回', 'bad'],
+  // 申辩裁定
+  pending: ['待裁定', 'warn'],
+  upheld: ['维持违约', 'bad'],
+  overturned: ['采纳申辩', 'ok'],
+  // 评分
+  draft: ['草稿', 'info'],
+  locked: ['月结锁定', 'hold'],
+  incremental: ['增量更新', 'info'],
+  month_end: ['月结统一', 'hold'],
+  // 调整单 / 付款
+  open: ['待处理', 'warn'],
+  applied: ['已处理', 'ok'],
+  paid: ['已付款', 'ok'],
+  unpaid: ['未付款', 'warn'],
 }
 
 export default function Badge({ value }) {

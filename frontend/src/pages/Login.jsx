@@ -27,8 +27,8 @@ export default function Login() {
   return (
     <div className="login-wrap">
       <form className="login-box" onSubmit={submit}>
-        <h1>收运批次重量一致性与计费差异数据服务</h1>
-        <div className="sub">来源证据 · 批次关联 · 计量裁定 · 费率编译 · 差异发布</div>
+        <h1>收运证据审计与承运商 SLA 绩效服务</h1>
+        <div className="sub">来源证据 · 批次关联 · 计量裁定 · 费率编译 · 差异发布 · SLA 评分</div>
         {error && <div className="alert error">{error}</div>}
         <input placeholder="用户名" value={username} onChange={(e) => setUsername(e.target.value)} />
         <input
@@ -41,9 +41,11 @@ export default function Login() {
           {loading ? '登录中…' : '登录'}
         </button>
         <div className="hint">
-          测试账号：analyst / Analyst@2026（数据团队，可写）
+          analyst / Analyst@2026（数据团队，证据录入与评分草稿，可写）
           <br />
-          auditor / Auditor@2026（财务复核，只读）
+          auditor / Auditor@2026（财务复核，全局只读）
+          <br />
+          supervisor / Supervisor@2026（物业主管，合同确认、投诉核实、裁定、月结锁定）
         </div>
       </form>
     </div>

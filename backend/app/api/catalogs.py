@@ -25,6 +25,9 @@ def list_contracts(db: OrmSession = Depends(get_db), _: User = Depends(get_curre
             "time_tolerance_minutes": c.time_tolerance_minutes,
             "quality_tolerance_pct": c.quality_tolerance_pct,
             "approved_conversion": c.approved_conversion,
+            "confirmed": c.confirmed,
+            "confirmed_at": c.confirmed_at.isoformat() if c.confirmed_at else None,
+            "sla_rules": c.sla_rules,
         }
         for c in db.query(Contract).order_by(Contract.id).all()
     ]

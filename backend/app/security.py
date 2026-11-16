@@ -63,3 +63,10 @@ def require_analyst(user: User = Depends(get_current_user)) -> User:
     if user.role != "analyst":
         raise HTTPException(status.HTTP_403_FORBIDDEN, "仅数据团队（analyst）可执行写操作")
     return user
+
+
+def require_supervisor(user: User = Depends(get_current_user)) -> User:
+    # 主管（supervisor）：合同确认、投诉核实、合并裁定、申辩裁决、月结锁定与调整
+    if user.role != "supervisor":
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "仅物业主管（supervisor）可执行该裁定操作")
+    return user

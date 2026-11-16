@@ -32,3 +32,23 @@ export const LINK_TYPE_LABEL = {
   receipt: '签收',
   gate: '门岗',
 }
+
+export const VIOLATION_LABEL = {
+  missed_collection: '漏收',
+  late_arrival: '到场超时',
+  late_receipt: '迟到签收',
+  valid_complaint: '核实投诉',
+}
+
+export const COMPLAINT_CATEGORY_LABEL = {
+  missed_collection: '漏收',
+  spillage: '污水/散落',
+  odor: '异味',
+  other: '其他',
+}
+
+export const ADJUSTMENT_TYPE_LABEL = {
+  late_signoff_after_lock: '锁定后迟到签收',
+  ruling_after_lock: '锁定后追溯裁定',
+  complaint_verified_after_lock: '锁定后投诉核实',
+}

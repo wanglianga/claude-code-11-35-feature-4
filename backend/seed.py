@@ -296,3 +296,6 @@ if __name__ == "__main__":
 
     init_db()
     seed()
+    from seed_sla import seed_sla
+
+    seed_sla()

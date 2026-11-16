@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -r re
 
 COPY app ./app
 COPY seed.py ./seed.py
+COPY seed_sla.py ./seed_sla.py
 
 ENV DATABASE_URL=postgresql+psycopg2://ccdev:ccdev@db:5432/ccdev \
     SEED_DEMO=true \

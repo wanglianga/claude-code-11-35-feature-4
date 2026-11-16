@@ -8,6 +8,9 @@ import BatchDetail from './pages/BatchDetail'
 import Evidence from './pages/Evidence'
 import ReviewQueue from './pages/ReviewQueue'
 import Reports from './pages/Reports'
+import Performance from './pages/Performance'
+import Complaints from './pages/Complaints'
+import TaskDrilldown from './pages/TaskDrilldown'
 
 function RequireAuth({ children }) {
   return getToken() ? children : <Navigate to="/login" replace />
@@ -31,6 +34,9 @@ export default function App() {
         <Route path="evidence" element={<Evidence />} />
         <Route path="review" element={<ReviewQueue />} />
         <Route path="reports" element={<Reports />} />
+        <Route path="performance" element={<Performance />} />
+        <Route path="sla" element={<Complaints />} />
+        <Route path="sla/tasks/:id" element={<TaskDrilldown />} />
       </Route>
     </Routes>
   )

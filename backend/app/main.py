@@ -2,19 +2,20 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .api import auth, batches, catalogs, evidence, reports
+from .api import auth, batches, catalogs, evidence, performance, reports
 from .config import settings
 from .db import init_db
 
 app = FastAPI(
-    title="收运批次重量一致性与计费差异数据服务",
-    version="1.0.0",
+    title="收运证据审计与承运商 SLA 绩效服务",
+    version="2.0.0",
     description=(
-        "以来源证据库、批次关系册、计量裁定器、费率编译器与差异发布器，"
-        "发布可审计的收运重量、计费依据与差异范围。本服务不派车、不卸料、不审批付款。"
+        "计量域：来源证据库、批次关系册、计量裁定器、费率编译器与差异发布器；"
+        "绩效域：排班承诺、车辆到场、处理场签收、居民投诉、申辩裁定与双模式月度 SLA 评分。"
+        "本服务不派车、不卸料、不审批付款。"
     ),
 )
 
@@ -31,6 +32,7 @@ app.include_router(evidence.router)
 app.include_router(batches.router)
 app.include_router(catalogs.router)
 app.include_router(reports.router)
+app.include_router(performance.router)
 
 
 @app.on_event("startup")
@@ -38,8 +40,10 @@ def startup():
     init_db()
     if settings.SEED_DEMO:
         import seed  # backend/seed.py（从 backend/ 目录启动时可导入）
+        import seed_sla
 
         seed.seed()
+        seed_sla.seed_sla()
 
 
 @app.get("/api/health")
@@ -55,7 +59,7 @@ if os.path.isdir(_dist):
     @app.get("/{full_path:path}")
     def spa(full_path: str):
         if full_path.startswith("api/"):
-            return {"detail": "Not Found"}
+            return JSONResponse(status_code=404, content={"detail": "Not Found"})
         target = os.path.join(_dist, full_path)
         if full_path and os.path.isfile(target):
             return FileResponse(target)
